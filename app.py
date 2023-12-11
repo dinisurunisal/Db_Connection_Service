@@ -16,7 +16,7 @@ class DynamoDBConnectionService:
         self.table = self._init_table()
 
     def _init_dynamodb(self):
-        return boto3.resource('dynamodb')
+        return boto3.resource('dynamodb', region_name='us-east-2')
 
     def _init_table(self):
         return self.dynamodb.Table(self.table_name)
