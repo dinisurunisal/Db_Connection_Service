@@ -41,12 +41,12 @@ jobs:
       run: |
         TAG=$GITHUB_SHA
         echo "tag=$TAG" >> $GITHUB_OUTPUT
-        docker build -t $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG .
-        docker push $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG
+        docker build -t 665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG .
+        docker push 665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG
 
     - name: Update Deployment Image Tag
       run: |
-        sed -i 's|image: .*|image: $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:${{ steps.docker_build_push.outputs.tag }}|' deployment.yaml
+        sed -i 's|image: .*|image: 665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:${{ steps.docker_build_push.outputs.tag }}|' deployment.yaml
 
     # - name: Deploy to EKS Cluster
     #   run: |
