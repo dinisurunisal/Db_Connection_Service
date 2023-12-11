@@ -30,7 +30,7 @@ jobs:
       id: docker_build_push
       run: |
         TAG=$GITHUB_SHA
-        echo "::set-output name=tag::$TAG"
+        echo "tag=$TAG" >> $GITHUB_OUTPUT
         docker build -t $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG .
         docker push $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG
 
