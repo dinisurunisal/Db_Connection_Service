@@ -27,26 +27,26 @@ jobs:
         aws-region: us-east-2
 
     - name: Build & Push Docker Image to Amazon ECR
-          id: docker_build_push
-          run: |
-            TAG=$GITHUB_SHA
-            echo "::set-output name=tag::$TAG"
-            docker build -t $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG .
-            docker push $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG
+      id: docker_build_push
+      run: |
+        TAG=$GITHUB_SHA
+        echo "::set-output name=tag::$TAG"
+        docker build -t $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG .
+        docker push $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:$TAG
 
-        - name: Update Deployment Image Tag
-          run: |
-            sed -i 's|image: .*|image: $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:${{ steps.docker_build_push.outputs.tag }}|' deployment.yaml
+    - name: Update Deployment Image Tag
+      run: |
+        sed -i 's|image: .*|image: $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:${{ steps.docker_build_push.outputs.tag }}|' deployment.yaml
 
-        - name: Install and configure AWS CLI
-          run: |
-            curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip awscliv2.zip
-            sudo ./aws/install
-            aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $665616097220.dkr.ecr.us-east-2.amazonaws.com
+    - name: Install and configure AWS CLI
+      run: |
+        curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $665616097220.dkr.ecr.us-east-2.amazonaws.com
 
-        # - name: Deploy to EKS Cluster
-        #   run: |
-        #     aws eks --region us-east-2 update-kubeconfig --name cwEKScluster
-        #     kubectl apply -f deployment.yaml
-        #     kubectl apply -f service.yaml
+    # - name: Deploy to EKS Cluster
+    #   run: |
+    #     aws eks --region us-east-2 update-kubeconfig --name cwEKScluster
+    #     kubectl apply -f deployment.yaml
+    #     kubectl apply -f service.yaml
