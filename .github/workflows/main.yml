@@ -26,6 +26,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-2
 
+    - name: Install and configure AWS CLI
+      run: |
+        curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $665616097220.dkr.ecr.us-east-2.amazonaws.com
+
     - name: Build & Push Docker Image to Amazon ECR
       id: docker_build_push
       run: |
@@ -37,13 +44,6 @@ jobs:
     - name: Update Deployment Image Tag
       run: |
         sed -i 's|image: .*|image: $665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:${{ steps.docker_build_push.outputs.tag }}|' deployment.yaml
-
-    - name: Install and configure AWS CLI
-      run: |
-        curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
-        sudo ./aws/install
-        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $665616097220.dkr.ecr.us-east-2.amazonaws.com
 
     # - name: Deploy to EKS Cluster
     #   run: |
