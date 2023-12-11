@@ -29,6 +29,9 @@ jobs:
     - name: Display AWS CLI Configuration
       run: aws configure list
 
+    - name: Check AWS CLI Version
+      run: aws --version
+
     - name: Login to Amazon ECR
       id: login-ecr
       run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $665616097220.dkr.ecr.us-east-2.amazonaws.com
