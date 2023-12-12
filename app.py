@@ -7,6 +7,10 @@ import boto3
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
+@app.route("/")
+def index():
+    return jsonify({"message": "Establishing the DB Connection"})
+
 class DynamoDBConnectionService:
     def __init__(self, table_name='developer_metrics'):
         self.table_name = table_name
