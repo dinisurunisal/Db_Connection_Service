@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-connection-deployment
+  namespace: db-connection
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      service: db-connection-service
+  template:
+    metadata:
+      labels:
+        app: db-connection-service
+    spec:
+      containers:
+      - name: db-connection
+        image: 665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:latest
+        env:
+        - name: AWS_ACCESS_KEY_ID
+          value: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        - name: AWS_SECRET_ACCESS_KEY
+          value: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        - name: AWS_REGION
+          value: us-east-2        
+        ports:
+        - containerPort: 5000
