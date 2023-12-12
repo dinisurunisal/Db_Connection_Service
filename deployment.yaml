@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: db-connection-service
+        service: db-connection-service
     spec:
       containers:
       - name: db-connection
