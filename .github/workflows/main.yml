@@ -50,6 +50,6 @@ jobs:
 
     - name: Deploy to EKS Cluster
       run: |
-        aws eks --region us-east-2 update-kubeconfig --name cwEKScluster
+        aws eks --region us-east-2 update-kubeconfig --name ccEKScluster
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
