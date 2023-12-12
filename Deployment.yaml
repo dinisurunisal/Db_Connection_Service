@@ -15,11 +15,13 @@ spec:
     spec:
       containers:
       - name: db-connection
-        image: your-registry/service1:latest
+        image: 665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq/db-connection-service:latest
         env:
         - name: AWS_ACCESS_KEY_ID
-          value: <your-access-key>
+          value: ${{ secrets.AWS_ACCESS_KEY_ID }}
         - name: AWS_SECRET_ACCESS_KEY
-          value: <your-secret-key>
+          value: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        - name: AWS_REGION
+          value: us-east-2        
         ports:
-        - containerPort: 8080
+        - containerPort: 5000
