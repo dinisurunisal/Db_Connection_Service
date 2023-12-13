@@ -22,11 +22,11 @@ spec:
       - name: db-connection
         image: 665616097220.dkr.ecr.us-east-2.amazonaws.com/developeriq:latest
         env:
-        - name: AWS_ACCESS_KEY_ID
+        - name: aws-access-key-id
           value: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        - name: AWS_SECRET_ACCESS_KEY
+        - name: aws-secret-access-key
           value: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        - name: AWS_REGION
-          value: us-east-2        
+        - name: aws-region
+          value: us-east-2       
         ports:
         - containerPort: 5000
