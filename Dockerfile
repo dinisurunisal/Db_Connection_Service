@@ -13,8 +13,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define environment variable
-ENV AWS_ACCESS_KEY_ID=<your-access-key>
-ENV AWS_SECRET_ACCESS_KEY=<your-secret-key>
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
