@@ -3,7 +3,7 @@ import requests
 
 class TestMicroserviceIntegration(unittest.TestCase):
     def setUp(self):
-        self.base_url = "http://a974ea06b96b948d284e88971cb94df2-935911028.us-east-2.elb.amazonaws.com:5000"
+        self.base_url = "http://a2b81ea6b1ca647949ff43098c1d7170-1678422433.us-east-2.elb.amazonaws.com:5000"
 
     def test_url_check(self): 
         response = requests.get(f"{self.base_url}/")
